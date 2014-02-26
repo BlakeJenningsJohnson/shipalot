@@ -13,6 +13,7 @@ gem 'figaro'
 gem 'httparty'
 gem 'brakeman'
 
+gem 'active_shipping'
 
 group :development, :test do
   gem "rspec-rails"

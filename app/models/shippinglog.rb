@@ -5,7 +5,7 @@ class ShippingLog  < ActiveRecord::Base
 
   def self.make_api_call(*args)
     current_request = parse_request_parameters(*args)
-    ups.find_rates(@origin, @destination, @package)
+    find_ups_rates(new_ups_client)
 
     # fedex.find_rates . . .
   end
@@ -40,9 +40,18 @@ class ShippingLog  < ActiveRecord::Base
                                     zip: destination_zip)
   end
 
-  def self.ups
-    ups = UPS.new(login: ENV['UPS_LOGIN'],
-                  password: ENV['UPS_PASSWORD'],
-                  key: ENV['UPS_KEY'])
+  def find_ups_rates(ups_client)
+    response =  ups_client.find_rates(@origin, @destination, @package)
+
+    response.rates.sort_by(&:price).collect {|rate| [rate.service_name, rate.price, rate.delivery_date]}
   end
+
+  private
+
+  def new_ups_client
+    UPS.new(login:        ENV['UPS_LOGIN'],
+                 password: ENV['UPS_PASSWORD'],
+                 key:          ENV['UPS_KEY'])
+  end
+
 end

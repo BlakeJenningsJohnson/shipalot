@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-describe Request do
+describe ShippingLog do
+
   let!(:params){ ['Seattle', 'US', 'WA', '98112',
-                  'US', 'Englewood', 'CO', '80111',
-                  '100', '10', '14', '4.5'] }
+                       'US', 'Englewood', 'CO', '80111',
+                       '100', '10', '14', '4.5'] }
 
   describe "parse_request_parameters" do
     it "sets the origin" do

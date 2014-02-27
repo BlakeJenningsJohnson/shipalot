@@ -1,4 +1,4 @@
-class RequestsController < ApplicationController
+class ShippingLogsController < ApplicationController
 
   def request
     Request.make_api_call(
@@ -15,5 +15,7 @@ class RequestsController < ApplicationController
       params[:package_depth],
       params[:package_length]
     )
+
+
   end
 end

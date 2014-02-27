@@ -1,4 +1,4 @@
-class Request < ActiveRecord::Base #delete this if we have one controller/model/whatever
+class ShippingLog  < ActiveRecord::Base
   include ActiveMerchant::Shipping
 
   attr_reader :origin, :package, :destination
@@ -23,9 +23,9 @@ class Request < ActiveRecord::Base #delete this if we have one controller/model/
   end
 
   def set_origin(origin_country, origin_state, origin_city, origin_zip)
-    @origin = Location.new(country: origin_country, 
-                             state: origin_state, 
-                              city: origin_city, 
+    @origin = Location.new(country: origin_country,
+                             state: origin_state,
+                              city: origin_city,
                                zip: origin_zip)
   end
 
@@ -34,14 +34,14 @@ class Request < ActiveRecord::Base #delete this if we have one controller/model/
   end
 
   def set_destination(destination_country, destination_city, destination_state, destination_zip)
-    @destination = Location.new(country: destination_country, 
-                                  state: destination_state, 
-                                   city: destination_city, 
+    @destination = Location.new(country: destination_country,
+                                  state: destination_state,
+                                   city: destination_city,
                                     zip: destination_zip)
   end
 
   def self.ups
-    ups = UPS.new(login: ENV['UPS_LOGIN'], 
+    ups = UPS.new(login: ENV['UPS_LOGIN'],
                   password: ENV['UPS_PASSWORD'],
                   key: ENV['UPS_KEY'])
   end

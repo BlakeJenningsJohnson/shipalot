@@ -1,4 +1,4 @@
-class Request < ActiveRecord::Base
+class Request < ActiveRecord::Base #delete this if we have one controller/model/whatever
   include ActiveMerchant::Shipping
 
   attr_reader :origin, :package, :destination

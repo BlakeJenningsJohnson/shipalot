@@ -1,5 +1,8 @@
 class ShippingLogsController < ApplicationController
 
+  def create
+  end
+
   def request
     ShippingLog.make_api_call(
       params[:origin_city],

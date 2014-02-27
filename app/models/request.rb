@@ -6,15 +6,16 @@ class Request < ActiveRecord::Base #delete this if we have one controller/model/
   def self.make_api_call(*args)
     current_request = parse_request_parameters(*args)
     ups.find_rates(@origin, @destination, @package)
+    # usps.find_rates(@origin, @destination, @package)
 
     # fedex.find_rates . . .
   end
 
   def self.parse_request_parameters(
-                                origin_city, origin_country, origin_state, origin_zip,
-                                destination_country, destination_city, destination_state, destination_zip,
-                                package_weight, package_height, package_depth, package_length
-                                )
+        origin_city, origin_country, origin_state, origin_zip,
+        destination_country, destination_city, destination_state, destination_zip,
+        package_weight, package_height, package_depth, package_length
+      )
       current_request = self.new #self is optional here
       current_request.set_origin(origin_country, origin_state, origin_city, origin_zip)
       current_request.set_destination(destination_country, destination_state, destination_city, destination_zip)
@@ -44,5 +45,9 @@ class Request < ActiveRecord::Base #delete this if we have one controller/model/
     ups = UPS.new(login: ENV['UPS_LOGIN'], 
                   password: ENV['UPS_PASSWORD'],
                   key: ENV['UPS_KEY'])
+  end
+
+  def self.usps
+    # usps = USPS.new(login: )
   end
 end

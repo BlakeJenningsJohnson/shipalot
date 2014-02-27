@@ -22,3 +22,5 @@ class ShippingLogsController < ApplicationController
 
   end
 end
+
+# to test w/HTTParty, you can add these options: options = { country:  'US', state:  'CA', city:  'Beverly Hills', zip:  '90210', country:  'US', state: 'WA', city:  'Seattle', postal_code:  '98122', package_weight: 100, package_height: 5, package_depth: 7, package_length: 6 }

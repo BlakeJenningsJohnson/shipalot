@@ -1,11 +1,13 @@
 class ShippingLog  < ActiveRecord::Base
   include ActiveMerchant::Shipping
+  before_action :set_ups_client
 
   attr_reader :origin, :package, :destination
 
   def self.make_api_call(*args)
     parse_request_parameters(*args)
-    ups.find_rates(@origin, @destination, @package)
+    ups_response = ups.find_rates(@origin, @destination, @package)
+    ups_response.parse_ups_rates
     # usps.find_rates(@origin, @destination, @package)
     # find_ups_rates(new_ups_client)
 
@@ -25,19 +27,12 @@ class ShippingLog  < ActiveRecord::Base
   end
 
 
-  # def find_ups_rates(ups_client)
-  #   response =  ups_client.find_rates(@origin, @destination, @package)
-
-  #   response.rates.sort_by(&:price).collect {|rate| [rate.service_name, rate.price, rate.delivery_date]}
-  # end
+  def parse_ups_rates
+    # response =  ups_client.find_rates(@origin, @destination, @package)
+   self.rates.sort_by(&:price).collect {|rate| [rate.service_name, rate.price, rate.delivery_date]}
+  end
 
   private
-
-  def new_ups_client
-    UPS.new(login:        ENV['UPS_LOGIN'],
-                 password: ENV['UPS_PASSWORD'],
-                 key:          ENV['UPS_KEY'])
-  end
 
   def self.set_origin(origin_country, origin_state, origin_city, origin_zip)
     Location.new(country: origin_country,
@@ -57,7 +52,7 @@ class ShippingLog  < ActiveRecord::Base
                                     zip: destination_zip)
   end
 
-  def self.ups
+  def self.set_ups_client
     ups = UPS.new(login: ENV['UPS_LOGIN'], 
                   password: ENV['UPS_PASSWORD'],
                   key: ENV['UPS_KEY'])

@@ -34,7 +34,10 @@ class Request < ActiveRecord::Base #delete this if we have one controller/model/
   end
 
   def set_destination(destination_country, destination_city, destination_state, destination_zip)
-    #like origin
+    @destination = Location.new(country: destination_country, 
+                                  state: destination_state, 
+                                   city: destination_city, 
+                                    zip: destination_zip)
   end
 
   def self.ups

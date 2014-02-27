@@ -1,7 +1,7 @@
-class RequestsController < ApplicationController
+class ShippingLogsController < ApplicationController
 
   def request
-    Request.make_api_call(
+    ShippingLog.make_api_call(
       params[:origin_city],
       params[:origin_country],
       params[:origin_state],
@@ -15,5 +15,7 @@ class RequestsController < ApplicationController
       params[:package_depth],
       params[:package_length]
     )
+
+
   end
 end

@@ -13,7 +13,6 @@ class ShippingLog  < ActiveRecord::Base
   def self.parse_request_parameters(
         params_arg
       )
-    # @package = set_package(package_weight.to_i, [package_height.to_f, package_depth.to_f, package_length.to_f])
     @origin = set_origin(params_arg[:origin])
     @destination = set_destination(params_arg[:destination])
     @package = set_package(params_arg[:package])

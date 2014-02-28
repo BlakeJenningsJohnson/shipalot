@@ -63,6 +63,7 @@ class ShippingLog  < ActiveRecord::Base
                   key: ENV['UPS_KEY'])
   end
 
+  def self.fedex
   # def self.usps
   #   # usps = USPS.new(login: )
   # end

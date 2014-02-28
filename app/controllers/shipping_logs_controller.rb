@@ -3,22 +3,16 @@ class ShippingLogsController < ApplicationController
   def create
   end
 
-  def request
-    ShippingLog.make_api_call(
-      params[:origin_city],
-      params[:origin_country],
-      params[:origin_state],
-      params[:origin_zip],
-      params[:destination_country],
-      params[:destination_city],
-      params[:destination_state],
-      params[:destination_zip],
-      params[:package_weight],
-      params[:package_height],
-      params[:package_depth],
-      params[:package_length]
+  def shipping_info
+    @ups = ShippingLog.make_api_call(
+      params
     )
-
-
+     respond_to do |format|
+      format.json { render json: @ups, status: :ok }
+      format.xml { render xml: { msg: "sorry" }, status: :bad_request }
+    end
   end
 end
+
+# to test w/HTTParty, you can add these options: 
+# options = { origin: {country:  'US', state:  'CA', city:  'Beverly Hills', zip:  '90210'}, destination: {country: 'US', state: 'WA', city:  'Seattle', zip:  '98122' }, package: { weight: 100, dimensions: [5, 7, 6] } }

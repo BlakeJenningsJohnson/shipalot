@@ -6,8 +6,8 @@ class ShippingLog  < ActiveRecord::Base
   def self.make_api_call(params_arg)
     parse_request_parameters(params_arg)
     ups = set_ups_client
-    ups_response = ups.find_rates(@origin, @destination, @package).rates
-    parse_ups_rates
+    ups_rates = ups.find_rates(@origin, @destination, @package).rates
+    parse_ups_rates(ups_rates)
   end
 
   def self.parse_request_parameters(
@@ -21,9 +21,9 @@ class ShippingLog  < ActiveRecord::Base
   end
 
 
-  def parse_ups_rates
+  def self.parse_ups_rates(ups_rates)
     # response =  ups_client.find_rates(@origin, @destination, @package)
-   rates.sort_by(&:price).collect {|rate| [rate.service_name, rate.price, rate.delivery_date]}
+   ups_rates.sort_by(&:price).collect {|rate| [rate.service_name, rate.price, rate.delivery_date]}
   end
 
   private

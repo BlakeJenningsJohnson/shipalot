@@ -1,6 +1,8 @@
 Shipalot::Application.routes.draw do
 
-  post '/request', to: 'shipping_logs#shipping_info'
+  post '/ups',    to: 'shipping_logs#ups_shipping'
+
+  post '/fedex',  to: 'shipping_logs#fedex_shipping'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

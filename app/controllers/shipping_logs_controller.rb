@@ -3,19 +3,8 @@ class ShippingLogsController < ApplicationController
   def create
   end
 
-  # def shipping_info
-  #   @ups = ShippingLog.make_big_api_call(
-  #     params
-  #   )
-  #   @fedex = 
-  #    respond_to do |format|
-  #     format.json { render json: @ups, status: :ok }
-  #     format.xml { render xml: { msg: "sorry" }, status: :bad_request }
-  #   end
-  # end
-
   def ups_shipping
-    @ups = ShippingLog.call(params, 'ups')
+    @ups = ShippingLog.assign_data_and_call(params, 'ups')
     respond_to do |format|
       format.json { render json: @ups, status: :ok }
       format.xml { render xml: { msg: "sorry" }, status: :bad_request }
@@ -23,7 +12,7 @@ class ShippingLogsController < ApplicationController
   end
 
   def fedex_shipping
-    @fedex = ShippingLog.call(params, 'fedex')
+    @fedex = ShippingLog.assign_data_and_call(params, 'fedex')
     respond_to do |format|
       format.json { render json: @fedex, status: :ok }
       format.xml { render xml: { msg: "sorry" }, status: :bad_request }

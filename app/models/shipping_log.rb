@@ -23,13 +23,15 @@ class ShippingLog  < ActiveRecord::Base
   end
 
   def self.make_call(origin, destination, package, carrier) #self method?
-    client = self.send(carrier.to_sym)
+    client = self.send(carrier.to_sym) # set up a new API client
+
     returned_rates = client.find_rates(origin, destination, package).rates
+
     parse_rates(returned_rates)
   end
 
   def self.parse_rates(any_rates)
-   any_rates.sort_by(&:price).collect {|rate| [rate.service_name, rate.price, rate.delivery_date]}
+    any_rates.sort_by(&:price).collect {|rate| [rate.service_name, rate.price, rate.delivery_date]}
   end
 
   private

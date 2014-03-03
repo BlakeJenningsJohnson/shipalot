@@ -7,28 +7,36 @@ class ShippingLog  < ActiveRecord::Base
   #add make_fedex_call 
   #add make_all_the_calls
 
-  def self.make_big_api_call(params_arg)
-    parse_request_parameters(params_arg) #this will move out of here if we separate calls?
-    make_fedex_call(@origin, @destination, @package)
-    make_ups_call(@origin, @destination, @package)
-    # make_usps_call(params_arg)
-  end
-
   def self.ups_call(params_arg)
-    parse_request_parameters(params_arg)
+    @origin = parse_origin_parameters(params_arg[:origin])
+    @destination = parse_destination_parameters(params_arg[:destination])
+    @package = parse_package_parameters(params_arg[:package])
     make_ups_call(@origin, @destination, @package)
   end
 
   def self.fedex_call(params_arg)
-    parse_request_parameters(params_arg)
+    @origin = parse_origin_parameters(params_arg[:origin])
+    @destination = parse_destination_parameters(params_arg[:destination])
+    @package = parse_package_parameters(params_arg[:package])
     make_fedex_call(@origin, @destination, @package)
   end
 
-  def self.parse_request_parameters(params_arg)
-    @origin = set_origin(params_arg[:origin])
-    @destination = set_destination(params_arg[:destination])
-    @package = set_package(params_arg[:package])    
+  def self.parse_origin_parameters(origin_params)
+    set_origin(origin_params)
   end
+
+  def self.parse_destination_parameters(destination_params)
+    set_destination(destination_params)
+  end
+
+  def self.parse_package_parameters(package_params)
+    set_package(package_params)
+  end
+
+  # def self.parse_request_parameters(params_arg)
+  #   @destination = set_destination(params_arg[:destination])
+  #   @package = set_package(params_arg[:package])    
+  # end
   
   def self.make_ups_call(origin, destination, package) #self method?
     ups = set_ups_client

@@ -14,13 +14,23 @@ class ShippingLog  < ActiveRecord::Base
     # make_usps_call(params_arg)
   end
 
+  def self.ups_call(params_arg)
+    parse_request_parameters(params_arg)
+    make_ups_call(@origin, @destination, @package)
+  end
+
+  def self.fedex_call(params_arg)
+    parse_request_parameters(params_arg)
+    make_fedex_call(@origin, @destination, @package)
+  end
+
   def self.parse_request_parameters(params_arg)
     @origin = set_origin(params_arg[:origin])
     @destination = set_destination(params_arg[:destination])
     @package = set_package(params_arg[:package])    
   end
   
-  def self.make_ups_call(params_arg) #self method?
+  def self.make_ups_call(origin, destination, package) #self method?
     ups = set_ups_client
     ups_rates = ups.find_rates(origin, destination, package).rates
     parse_rates(ups_rates)
@@ -30,7 +40,7 @@ class ShippingLog  < ActiveRecord::Base
    any_rates.sort_by(&:price).collect {|rate| [rate.service_name, rate.price, rate.delivery_date]}
   end
 
-  def self.make_fedex_call(params_arg) #self method?
+  def self.make_fedex_call(origin, destination, package) #self method?
     fedex = set_fedex_client
     fedex_rates = fedex.find_rates(origin, destination, package).rates
     parse_rates(fedex_rates)

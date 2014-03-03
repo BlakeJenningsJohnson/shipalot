@@ -15,7 +15,7 @@ class ShippingLogsController < ApplicationController
   # end
 
   def ups_shipping
-    @ups = ShippingLog.ups_call(params)
+    @ups = ShippingLog.call(params, 'ups')
     respond_to do |format|
       format.json { render json: @ups, status: :ok }
       format.xml { render xml: { msg: "sorry" }, status: :bad_request }
@@ -23,7 +23,7 @@ class ShippingLogsController < ApplicationController
   end
 
   def fedex_shipping
-    @fedex = ShippingLog.fedex_call(params)
+    @fedex = ShippingLog.call(params, 'fedex')
     respond_to do |format|
       format.json { render json: @fedex, status: :ok }
       format.xml { render xml: { msg: "sorry" }, status: :bad_request }

@@ -7,22 +7,22 @@ class ShippingLog  < ActiveRecord::Base
   #add make_fedex_call 
   #add make_all_the_calls
 
-  def self.make_big_api_call(params_arg)
-    parse_request_parameters(params_arg) #this will move out of here if we separate calls?
-    make_fedex_call(@origin, @destination, @package)
-    make_ups_call(@origin, @destination, @package)
-    # make_usps_call(params_arg)
+  # def self.make_big_api_call(params_arg)
+  #   parse_request_parameters(params_arg) #this will move out of here if we separate calls?
+  #   make_fedex_call(@origin, @destination, @package)
+  #   make_ups_call(@origin, @destination, @package)
+  #   # make_usps_call(params_arg)
+  # end
+
+  def self.call(params_arg, delivery_carrier)
+    parse_request_parameters(params_arg)
+    make_call(@origin, @destination, @package, delivery_carrier)
   end
 
-  def self.ups_call(params_arg)
-    parse_request_parameters(params_arg)
-    make_ups_call(@origin, @destination, @package)
-  end
-
-  def self.fedex_call(params_arg)
-    parse_request_parameters(params_arg)
-    make_fedex_call(@origin, @destination, @package)
-  end
+  # def self.fedex_call(params_arg)
+  #   parse_request_parameters(params_arg)
+  #   make_fedex_call(@origin, @destination, @package)
+  # end
 
   def self.parse_request_parameters(params_arg)
     @origin = set_origin(params_arg[:origin])
@@ -30,10 +30,10 @@ class ShippingLog  < ActiveRecord::Base
     @package = set_package(params_arg[:package])    
   end
   
-  def self.make_ups_call(origin, destination, package) #self method?
-    ups = set_ups_client
-    ups_rates = ups.find_rates(origin, destination, package).rates
-    parse_rates(ups_rates)
+  def self.make_call(origin, destination, package, carrier) #self method?
+    client = self.send(:carrier)
+    rates = client.find_rates(origin, destination, package).rates
+    parse_rates(rates)
   end
 
   def self.parse_rates(any_rates)
@@ -65,13 +65,13 @@ class ShippingLog  < ActiveRecord::Base
     Location.new(destination_info)
   end
 
-  def self.set_ups_client
+  def self.ups
     UPS.new(login: ENV['UPS_LOGIN'],
                   password: ENV['UPS_PASSWORD'],
                   key: ENV['UPS_KEY'])
   end
 
-  def self.set_fedex_client
+  def self.fedex
     FedEx.new(:login => ENV['FEDEX_METER'],
               :password => ENV['FEDEX_PASSWORD'], 
               key: ENV['FEDEX_KEY'], 

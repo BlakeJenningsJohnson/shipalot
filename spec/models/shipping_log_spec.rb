@@ -38,7 +38,7 @@ describe ShippingLog do
       ups.stub(:find_rates).and_return(:the_rates)
       expect(ShippingLog).to receive(:ups).and_return(ups)
 
-      ShippingLog.make_ups_call(set_origin(data_params[:origin]), data_params[:destination], data_params[:package])
+      ShippingLog.make_call(set_origin(data_params[:origin]), data_params[:destination], data_params[:package])
     end
   end
 end

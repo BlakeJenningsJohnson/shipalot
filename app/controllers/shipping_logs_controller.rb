@@ -4,7 +4,7 @@ class ShippingLogsController < ApplicationController
   end
 
   def shipping_info
-    @ups = ShippingLog.make_api_call(
+    @ups = ShippingLog.make_big_api_call(
       params
     )
      respond_to do |format|

@@ -8,19 +8,19 @@ describe ShippingLog do
 
   describe "parse_request_parameters" do
     it "sets the origin" do
-      request = ShippingLog.parse_request_parameters(*params)
-      expect(request.origin).to be_an_instance_of(ActiveMerchant::Shipping::Location)
+      parsed_data = ShippingLog.parse_request_parameters(params)
+      expect(parsed_data.origin).to be_an_instance_of(ActiveMerchant::Shipping::Location)
     end
   end
 
 
   describe "make_api_call" do
-    xit "calls UPS" do
+    it "calls UPS" do
       ups = double
       ups.stub(:find_rates).and_return(:the_rates)
       expect(ShippingLog).to receive(:ups).and_return(ups)
 
-      Request.make_api_call(*params)
+      ShippingLog.make_ups_call(params)
     end
   end
 end

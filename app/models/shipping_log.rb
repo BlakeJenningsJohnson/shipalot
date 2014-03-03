@@ -9,8 +9,8 @@ class ShippingLog  < ActiveRecord::Base
 
   def self.make_big_api_call(params_arg)
     parse_request_parameters(params_arg) #this will move out of here if we separate calls?
-    make_fedex_call(params_arg)
-    make_ups_call(params_arg)
+    make_fedex_call(@origin, @destination, @package)
+    make_ups_call(@origin, @destination, @package)
     # make_usps_call(params_arg)
   end
 
@@ -20,9 +20,9 @@ class ShippingLog  < ActiveRecord::Base
     @package = set_package(params_arg[:package])    
   end
   
-  def make_ups_call(params_arg) #self method?
+  def self.make_ups_call(params_arg) #self method?
     ups = set_ups_client
-    ups_rates = ups.find_rates(@origin, @destination, @package).rates
+    ups_rates = ups.find_rates(origin, destination, package).rates
     parse_rates(ups_rates)
   end
 
@@ -30,9 +30,9 @@ class ShippingLog  < ActiveRecord::Base
    any_rates.sort_by(&:price).collect {|rate| [rate.service_name, rate.price, rate.delivery_date]}
   end
 
-  def make_fedex_call(params_arg) #self method?
+  def self.make_fedex_call(params_arg) #self method?
     fedex = set_fedex_client
-    fedex_rates = fedex.find_rates(@origin, @destination, @package).rates
+    fedex_rates = fedex.find_rates(origin, destination, package).rates
     parse_rates(fedex_rates)
   end
 

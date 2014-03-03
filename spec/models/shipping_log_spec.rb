@@ -3,6 +3,7 @@ require 'spec_helper'
 include ActiveMerchant::Shipping
 
 describe ShippingLog do
+  # use_vcr_cassette "ups", :record => :new_episodes
 
   let(:data_params){ { origin: {country:  'US', state:  'CA', city:  'Beverly Hills', zip:  '90210'}, destination: {country: 'US', state: 'WA', city:  'Seattle', zip:  '98122' }, package: { weight: 100, dimensions: [5, 7, 6] } } }
 
@@ -49,13 +50,16 @@ describe ShippingLog do
     end
   end
 
-  describe "parse_rates" do
-    xit "returns parsed rates" do
-      fake_rates = double("fake_rates")
-      ShippingLog.stub(:find_rates).and_return(:the_rates)
-      expect(ShippingLog).to receive(:fake_rates).and_return(ups)
+  describe "REMOTE parse_rates" do
+    it "parses rates correctly" do
 
-    #   ShippingLog.make_call(set_origin(data_params[:origin]), data_params[:destination], data_params[:package])
+      response = VCR.use_cassette 'ups' do
+        ShippingLog.make_call(origin, destination, package, "ups")
+      end
+
+      expect(response).to be_an_instance_of(Array)
+      expect(response.first).to eq ["UPS Ground", 1077, nil]
+      expect(response.last.first).to eq("UPS Next Day Air Early A.M.")
     end
   end
 end

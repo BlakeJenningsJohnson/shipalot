@@ -3,15 +3,18 @@ class ShippingLog  < ActiveRecord::Base
 
   attr_reader :origin, :package, :destination
 
+# Location.should_receive(:new).with(origin)
+
   def self.assign_data_and_call(params_arg, carrier)
-    @origin = parse_origin_parameters(params_arg[:origin])
+    @origin = Location.new(params_arg[:origin])
     @destination = parse_destination_parameters(params_arg[:destination])
     @package = parse_package_parameters(params_arg[:package])
     make_call(@origin, @destination, @package, carrier)
   end
 
   def self.parse_origin_parameters(origin_params)
-    set_origin(origin_params)
+    # set_origin(origin_params)
+    Location.new(origin_params)
   end
 
   def self.parse_destination_parameters(destination_params)

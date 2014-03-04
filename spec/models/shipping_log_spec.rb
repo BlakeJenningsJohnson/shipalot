@@ -61,5 +61,6 @@ describe ShippingLog do
       expect(response.first).to eq ["UPS Ground", 1077, nil]
       expect(response.last.first).to eq("UPS Next Day Air Early A.M.")
     end
+
   end
 end

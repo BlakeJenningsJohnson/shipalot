@@ -15,6 +15,11 @@ gem 'brakeman'
 
 gem 'active_shipping'
 
+group :test do
+  gem 'webmock'
+  gem 'vcr'
+end
+
 group :development, :test do
   gem "rspec-rails"
   gem "guard-rspec"

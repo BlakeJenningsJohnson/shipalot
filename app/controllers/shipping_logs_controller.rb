@@ -14,9 +14,9 @@ class ShippingLogsController < ApplicationController
   end
 
   def fedex_shipping
-    log = ShippingLog.create(request_dump: params.to_s)
-
-    @fedex = ShippingLog.assign_data_and_call(params, 'fedex', log)
+    @fedex = RateGetter.new(params, "fedex").parsed_rates
+    ShippingLog.create(request_dump: params.to_s, response_dump: @fedex.to_s)
+    
     respond_to do |format|
       format.json { render json: @fedex, status: :ok }
       format.xml { render xml: { msg: "sorry" }, status: :bad_request }

@@ -4,9 +4,9 @@ class ShippingLogsController < ApplicationController
   end
 
   def ups_shipping
-    ShippingLog.create(request_dump: params.to_s)
+    log = ShippingLog.create(request_dump: params.to_s)
 
-    @ups = ShippingLog.assign_data_and_call(params, 'ups')
+    @ups = ShippingLog.assign_data_and_call(params, 'ups', log)
     respond_to do |format|
       format.json { render json: @ups, status: :ok }
       format.xml { render xml: { msg: "sorry" }, status: :bad_request }
@@ -14,9 +14,9 @@ class ShippingLogsController < ApplicationController
   end
 
   def fedex_shipping
-    ShippingLog.create(request_dump: params.to_s)
+    log = ShippingLog.create(request_dump: params.to_s)
 
-    @fedex = ShippingLog.assign_data_and_call(params, 'fedex')
+    @fedex = ShippingLog.assign_data_and_call(params, 'fedex', log)
     respond_to do |format|
       format.json { render json: @fedex, status: :ok }
       format.xml { render xml: { msg: "sorry" }, status: :bad_request }

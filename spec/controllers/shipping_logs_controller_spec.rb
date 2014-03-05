@@ -27,19 +27,6 @@ describe ShippingLogsController do
         post :ups_shipping, data_params
       end
       expect(assigns(:ups)).to be_an_instance_of Array
-
-      # RateGetter.stub(:parsed_rates).with(data_parms, 'ups').and_return(@object)
     end
   end
-
 end
-
-  # def ups_shipping
-  #   @ups = RateGetter.new(params, "ups").parsed_rates
-  #   ShippingLog.create(request_dump: params.to_s, response_dump: @ups.to_s)
-
-  #   respond_to do |format|
-  #     format.json { render json: @ups, status: :ok }
-  #     format.xml { render xml: { msg: "sorry" }, status: :bad_request }
-  #   end
-  # end

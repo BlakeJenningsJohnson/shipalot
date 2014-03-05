@@ -18,7 +18,7 @@ class RateGetter
   end
 
   def package
-    Package.new(params_hash[:package][:weight], params_hash[:package][:dimensions])
+    Package.new(params_hash[:package][:weight].to_i, params_hash[:package][:dimensions].map { |dimension| dimension.to_i })
   end
 
   def client

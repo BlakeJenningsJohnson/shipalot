@@ -4,7 +4,7 @@ class ShippingLogsController < ApplicationController
   end
 
   def ups_shipping
-    @ups = RateGetter.new(params, "ups").parsed_rates
+    @ups = RateGetter.new(params, 'ups').parsed_rates
     ShippingLog.create(request_dump: params.to_s, response_dump: @ups.to_s)
 
     respond_to do |format|
@@ -14,7 +14,7 @@ class ShippingLogsController < ApplicationController
   end
 
   def fedex_shipping
-    @fedex = RateGetter.new(params, "fedex").parsed_rates
+    @fedex = RateGetter.new(params, 'fedex').parsed_rates
     ShippingLog.create(request_dump: params.to_s, response_dump: @fedex.to_s)
     
     respond_to do |format|

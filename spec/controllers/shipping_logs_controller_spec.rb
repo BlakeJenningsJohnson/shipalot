@@ -29,4 +29,13 @@ describe ShippingLogsController do
       expect(assigns(:ups)).to be_an_instance_of Array
     end
   end
+
+  describe 'POST "fedex"' do
+    it 'should be successful' do
+      VCR.use_cassette 'fedex' do
+        post :fedex_shipping, data_params
+      end
+      expect(assigns(:fedex)).to be_an_instance_of Array
+    end
+  end
 end

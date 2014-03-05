@@ -18,7 +18,10 @@ class RateGetter
   end
 
   def package
-    Package.new(params_hash[:package][:weight].to_i, params_hash[:package][:dimensions].map { |dimension| dimension.to_i })
+    Package.new(
+      params_hash[:package][:weight].to_i,
+      params_hash[:package][:dimensions].map { |dimension| dimension.to_i }
+    )
   end
 
   def client
@@ -30,7 +33,9 @@ class RateGetter
   end
 
   def parsed_rates
-    returned_rates.flatten.sort_by(&:price).collect {|rate| [rate.service_name, rate.price, rate.delivery_date]}
+    returned_rates.flatten.sort_by(&:price).map { |rate| [rate.service_name,
+                                                          rate.price,
+                                                          rate.delivery_date] }
   end
 
   private
@@ -53,4 +58,3 @@ class RateGetter
       )
   end
 end
-

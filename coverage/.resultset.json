@@ -1,14 +1,14 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/scwshoes/Projects/rails_projects/shipalot/config/environment.rb": [
+      "/Users/blakejohnson/ada/shipalot/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/config/application.rb": [
+      "/Users/blakejohnson/ada/shipalot/config/application.rb": [
         1,
         null,
         1,
@@ -33,13 +33,13 @@
         null,
         null
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/config/boot.rb": [
+      "/Users/blakejohnson/ada/shipalot/config/boot.rb": [
         null,
         1,
         null,
         1
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/config/environments/test.rb": [
+      "/Users/blakejohnson/ada/shipalot/config/environments/test.rb": [
         1,
         null,
         null,
@@ -77,7 +77,7 @@
         1,
         null
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/config/initializers/backtrace_silencers.rb": [
+      "/Users/blakejohnson/ada/shipalot/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -86,13 +86,13 @@
         null,
         null
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/config/initializers/filter_parameter_logging.rb": [
+      "/Users/blakejohnson/ada/shipalot/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/config/initializers/inflections.rb": [
+      "/Users/blakejohnson/ada/shipalot/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -110,33 +110,22 @@
         null,
         null
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/config/initializers/mime_types.rb": [
+      "/Users/blakejohnson/ada/shipalot/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         null,
         null
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/config/initializers/secret_token.rb": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
+      "/Users/blakejohnson/ada/shipalot/config/initializers/secret_token.rb": [
+        1
+      ],
+      "/Users/blakejohnson/ada/shipalot/config/initializers/session_store.rb": [
         null,
         null,
         1
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/config/initializers/session_store.rb": [
-        null,
-        null,
-        1
-      ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/config/initializers/wrap_parameters.rb": [
+      "/Users/blakejohnson/ada/shipalot/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -152,13 +141,13 @@
         null,
         null
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/spec/factories/shippinglog.rb": [
+      "/Users/blakejohnson/ada/shipalot/spec/factories/shippinglog.rb": [
         1,
         1,
         null,
         null
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/config/routes.rb": [
+      "/Users/blakejohnson/ada/shipalot/config/routes.rb": [
         1,
         null,
         1,
@@ -220,63 +209,63 @@
         null,
         null
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/app/helpers/application_helper.rb": [
+      "/Users/blakejohnson/ada/shipalot/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/app/helpers/requests_helper.rb": [
+      "/Users/blakejohnson/ada/shipalot/app/helpers/requests_helper.rb": [
         1,
         null
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/spec/support/vcr.rb": [
+      "/Users/blakejohnson/ada/shipalot/spec/support/vcr.rb": [
         1,
         null,
         1,
         1,
         1,
-        1,
-        1,
-        null
-      ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/app/controllers/shipping_logs_controller.rb": [
-        1,
-        null,
-        1,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/app/controllers/application_controller.rb": [
-        1,
-        null,
-        null,
         1,
         1,
         null
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/spec/models/rate_getter_spec.rb": [
+      "/Users/blakejohnson/ada/shipalot/app/controllers/shipping_logs_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/blakejohnson/ada/shipalot/app/controllers/application_controller.rb": [
+        1,
+        null,
+        null,
+        1,
+        1,
+        null
+      ],
+      "/Users/blakejohnson/ada/shipalot/spec/models/rate_getter_spec.rb": [
         1,
         null,
         1,
@@ -342,12 +331,12 @@
         1,
         1,
         null,
-        1,
+        0,
         null,
         null,
         null
       ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/app/models/rate_getter.rb": [
+      "/Users/blakejohnson/ada/shipalot/app/models/rate_getter.rb": [
         1,
         1,
         null,
@@ -380,7 +369,7 @@
         null,
         null,
         1,
-        15,
+        8,
         null,
         null,
         1,
@@ -395,74 +384,6 @@
         null,
         1,
         1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/scwshoes/Projects/rails_projects/shipalot/spec/models/shipping_log_spec.rb": [
-        1,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null,
         null,
         null,
@@ -474,6 +395,6 @@
         null
       ]
     },
-    "timestamp": 1393987216
+    "timestamp": 1394468026
   }
 }

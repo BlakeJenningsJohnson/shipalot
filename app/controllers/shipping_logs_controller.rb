@@ -4,8 +4,8 @@ class ShippingLogsController < ApplicationController
   end
 
   def ups_shipping
-    @ups = RateGetter.new(params, "ups").parsed_rates
-    ShippingLog.create(request_dump: params.to_s, response_dump: @ups.to_s)
+    ups = RateGetter.new(params, "ups").parsed_rates
+    ShippingLog.create(request_dump: params.to_s, response_dump: ups.to_s)
 
     respond_to do |format|
       format.json { render json: @ups, status: :ok }
@@ -14,11 +14,11 @@ class ShippingLogsController < ApplicationController
   end
 
   def fedex_shipping
-    @fedex = RateGetter.new(params, "fedex").parsed_rates
-    ShippingLog.create(request_dump: params.to_s, response_dump: @fedex.to_s)
+    fedex = RateGetter.new(params, "fedex").parsed_rates
+    ShippingLog.create(request_dump: params.to_s, response_dump: fedex.to_s)
     
     respond_to do |format|
-      format.json { render json: @fedex, status: :ok }
+      format.json { render json: fedex, status: :ok }
       format.xml { render xml: { msg: "sorry" }, status: :bad_request }
     end
   end

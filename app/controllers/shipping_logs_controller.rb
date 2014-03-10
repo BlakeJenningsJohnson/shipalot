@@ -7,8 +7,12 @@ class ShippingLogsController < ApplicationController
     ShippingLog.create(request_dump: params.to_s, response_dump: @ups.to_s)
 
     respond_to do |format|
-      format.json { render json: @ups, status: :ok }
-      format.xml { render xml: { msg: "sorry" }, status: :bad_request }
+      if @ups.count == 1
+        format.json { render json: @ups, status: :bad_request }
+      else
+        format.json { render json: @ups, status: :ok }
+        format.xml { render xml: { msg: "sorry" }, status: :bad_request }
+      end
     end
   end
 
@@ -24,13 +28,4 @@ class ShippingLogsController < ApplicationController
 end
 
 # to test w/HTTParty, you can add these options:
-# options = { origin: { country:  'US',
-              #           state:  'CA',
-              #           city:  'Beverly Hills',
-              #           zip:  '90210'},
-              # destination: { country: 'US',
-              #                state: 'WA',
-              #                city:  'Seattle',
-              #                zip:  '98122' },
-              # package: { weight: 100,
-              #            dimensions: [5, 7, 6] } }
+# options = { origin: {country:  'US', state:  'CA', city:  'Beverly Hills', zip:  '90210'}, destination: {country: 'US', state: 'WA', city:  'Seattle', zip:  '98122' }, package: { weight: 100, dimensions: [5, 7, 6] } }

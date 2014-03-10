@@ -36,6 +36,8 @@ class RateGetter
     returned_rates.flatten.sort_by(&:price).map { |rate| [rate.service_name,
                                                           rate.price,
                                                           rate.delivery_date] }
+  rescue ActiveMerchant::Shipping::ResponseError
+    return ["Sorry, this request cannot be made"]
   end
 
   private

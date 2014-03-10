@@ -18,12 +18,7 @@
 # VCR Cassettes
 /fixtures
 
-/config/initializers/secret_token.rb
 # Ignore application configuration
 /config/application.yml
+/coverage
 
-<<<<<<< HEAD
-/coverage
-=======
-/coverage
->>>>>>> 103e4da7cbbbd59dc25024fdbb096ea810c0ed90
